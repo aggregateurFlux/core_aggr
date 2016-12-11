@@ -6,6 +6,5 @@ import java.util.List;
 import org.restws.aggreg.model.Post;
 
 public class PostService {
-
 	
 }

@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.restws.aggreg.model.Post;
+import org.restws.aggreg.model.User;
 
-public class TwitterService {
+public class InstagramApiService {
+	public List<Post> list;
 
-	private List<Post> list;
-
-	public List<Post> getPosts() {
+	public static List<Post> getPosts(User user) {
+		List<Post> list = new ArrayList();
 		return list;
 	}
 	
-	public TwitterService(List<Post> list) {
+	public InstagramApiService() {
+		super();
+	}
+	public InstagramApiService(List<Post> list) {
 		super();
 		this.list = list;
-	}
-	public TwitterService() {
-		super();
-		list = new ArrayList<Post>();
 	}
 	public List<Post> getList() {
 		return list;
@@ -28,4 +28,6 @@ public class TwitterService {
 		this.list = list;
 	}
 	
+	
+
 }

@@ -2,30 +2,30 @@ package org.restws.aggreg.model;
 
 public class TwitterAccount extends SocialNetworkAccount {
 
-	private String accessTokenId;
-	private String accessTokenSecret;
+	private String access_token;
+	private String access_token_secret;
 	
 	public TwitterAccount() {
 		super();
 		this.setName("Twitter");
 	}
-	public TwitterAccount(String accessTokenId, String accessTokenSecret) {
+	public TwitterAccount(String access_token, String access_token_secret) {
 		super();
 		this.setName("Twitter");
-		this.accessTokenId = accessTokenId;
-		this.accessTokenSecret = accessTokenSecret;
+		this.access_token = access_token;
+		this.access_token_secret = access_token_secret;
 	}
 	public String getAccessTokenId() {
-		return accessTokenId;
+		return access_token;
 	}
-	public void setAccessTokenId(String accessTokenId) {
-		this.accessTokenId = accessTokenId;
+	public void setAccessTokenId(String access_token) {
+		this.access_token = access_token;
 	}
 	public String getAccessTokenSecret() {
-		return accessTokenSecret;
+		return access_token_secret;
 	}
-	public void setAccessTokenSecret(String accessTokenSecret) {
-		this.accessTokenSecret = accessTokenSecret;
+	public void setAccessTokenSecret(String access_token_secret) {
+		this.access_token_secret = access_token_secret;
 	}
 	
 	
