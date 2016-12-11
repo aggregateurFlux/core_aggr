@@ -31,9 +31,18 @@ public class PostRessource {
     }
 	
 	@POST
+	@Path("/createPost")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addTwitterAccount(@PathParam("id") String socialNetwork,@PathParam("accessTokenId") String accessTokenId,@PathParam("accessTokenSecret") String accessTokenSecret) {
-		return userService.addSocialNetwork(socialNetwork, accessTokenId,accessTokenSecret);
+	public String createPost(@PathParam("access_token") String accesstoken,@PathParam("access_token_secret") String access_token_secret,	@PathParam("content") String content) {
+		return "Posted";
+	}
+	
+	@POST
+	@Path("/commentPost")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String commentPost(@PathParam("token") String token,@PathParam("content") String content) {
+		return "Posted";
 	}
 }
