@@ -1,25 +1,31 @@
 package org.restws.aggreg.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.restws.aggreg.model.InstagramAccount;
+import org.restws.aggreg.model.TwitterAccount;
 import org.restws.aggreg.model.User;
 
 public class UserService {
 
-	List<User> list = new ArrayList<>();
-	
-	public List<User> getAllUsers() {
-		return list;
+	public User getAccountInfos(String id) {
+		return new User(id,"login","password");
 	}
 	
-	public void createAccount(String identifiant, String password) {
-		this.list.add(new User(identifiant, password));
+	public User connection(String login, String password) {
+		return new User("1", login, password);
 	}
 	
-	public User addAccount(User user) {
-		this.list.add(user);
-		return user;
+	public User accountCreation(String login, String password) {
+		return new User("1", login, password);
+	}
+	
+	public String addSocialNetwork(String token) {
+		InstagramAccount newSocialNetwork = new InstagramAccount(token);
+		return "Social Network added";
+	}
+	
+	public String addSocialNetwork(String accessTokenId, String accessTokenSecret) {
+		TwitterAccount newSocialNetwork = new TwitterAccount(accessTokenId, accessTokenSecret);
+		return "Social Network added";
 	}
 	
 }
