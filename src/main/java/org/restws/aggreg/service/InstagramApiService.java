@@ -13,13 +13,18 @@ import com.google.gson.Gson;
 public class InstagramApiService {
 
 	public static List<Post> getPosts(User user) throws IOException {
-		HashMap<String,String> InstagramParams = new HashMap<String,String>();
+		//A DECOMMENTER SI LES AUTRES APIs SONT FONCTIONNELLES
+		/*HashMap<String,String> InstagramParams = new HashMap<String,String>();
 		InstagramParams.put("access_token", user.getInstagramAccount().getToken());
-		
         String json = HttpService.callMethod("GET", "http://localhost:8000/user/feed", InstagramParams);
-        
         Gson gson = new Gson();
-        
-		return gson.fromJson( json , List.class);
+		return gson.fromJson( json , List.class);*/
+		
+		//A COMMENTER SI LES AUTRES APIs SONT FONCTIONNELLES
+		List<Post> list = new ArrayList<Post>();
+		list.add(new Post());
+		list.add(new Post());
+		list.add(new Post());
+		return list;
 	}
 }

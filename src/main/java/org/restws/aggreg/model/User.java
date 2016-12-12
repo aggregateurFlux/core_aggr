@@ -35,6 +35,9 @@ public class User {
 		this.twitteraccount = twitteraccount;
 		this.instagramAccount = instagramAccount;
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getId() {
 		return id;
 	}

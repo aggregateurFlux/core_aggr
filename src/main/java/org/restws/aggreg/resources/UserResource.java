@@ -1,5 +1,7 @@
 package org.restws.aggreg.resources;
 
+import java.io.IOException;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,19 +17,48 @@ import org.restws.aggreg.service.UserApiService;
 
 @Path("/user")
 public class UserResource {
-	UserApiService userService = new UserApiService();
 	
-	//getUser
-	//return : User
+	/*Récupérer un user depuis son id
+	*GET : http://localhost:8080/core_aggreg/webapi/user/{id}
+	*Retour : 
+	{
+	    "id":"xxx",
+	    "instagramAccount": {
+	        "name":"Instagram",
+	        "token":"token"
+	        },
+	    "login":"login",
+	    "password":"password",
+	    "twitteraccount": {
+	    "name":"Twitter",
+	    "accessTokenId":"id",
+	    "accessTokenSecret":"secret"}
+	}
+	*/
 	@GET
 	@Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUser(@PathParam("id") String id) {
-        return userService.getAccountInfos(id);
+    public User getUser(@PathParam("id") String id) throws IOException {
+        return UserApiService.getAccountInfos(id);
     }
 	
-	//Connection
-	//return : User
+	/*Connexion : Récupérer l'id d'un user à partir du login/password
+	 *GET : http://localhost:8080/core_aggreg/webapi/user/connection/{login}&{password}
+	 *Retour : 
+	{
+	    "id":"xxx",
+	    "instagramAccount": {
+	        "name":"Instagram",
+	        "token":"token"
+	        },
+	    "login":"login",
+	    "password":"password",
+	    "twitteraccount": {
+	    "name":"Twitter",
+	    "accessTokenId":"id",
+	    "accessTokenSecret":"secret"}
+	}
+	 */
 	@GET
 	@Path("/connection/{login}&{password}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,8 +66,24 @@ public class UserResource {
         return UserApiService.connection(login, password);
     }
 
-	//createAccount
-	//return : User
+	/*Création de compte : Créer un user côté serveur et récupérer ses infos
+	 * POST : http://localhost:8080/core_aggreg/webapi/user/createAccount
+	 * Envoi : { "login":"login", "password":"password" }
+	 * Retour : 
+	{
+	    "id":"xxx",
+	    "instagramAccount": {
+	        "name":"Instagram",
+	        "token":"token"
+	        },
+	    "login":"login",
+	    "password":"password",
+	    "twitteraccount": {
+	    "name":"Twitter",
+	    "accessTokenId":"id",
+	    "accessTokenSecret":"secret"}
+	}
+	 */
 	@POST
 	@Path("/createAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -45,8 +92,13 @@ public class UserResource {
 		return UserApiService.accountCreation(login, password);
 	}
 	
-	//addInstagramAccount
-	//return string
+	/*Lier un compte instagram à un compte user
+	 * POST : http://localhost:8080/core_aggreg/webapi/user/addInstagramAccount
+	 * Envoi : {  "token":"token"  }
+	 * Retour :
+	    true : liaison créer
+	    false : echec de la liason
+	 */
 	@POST
 	@Path("/addInstagramAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -55,8 +107,13 @@ public class UserResource {
 		return UserApiService.addInstagramAccount(new InstagramAccount(token));
 	}
 	
-	//addTwitterAccount
-	//return String
+	/*Lier un compte twitter à un compte user
+	 * POST : http://localhost:8080/core_aggreg/webapi/user/addTwitterAccount
+	 * Envoi : {  "access_token_id":"access_token_id", "access_token_secret":"access_token_secret"  }
+	 * Retour :
+	    true : liaison créée
+	    false : echec de la liason
+	 */
 	@POST
 	@Path("/addTwitterAccount")
 	@Consumes(MediaType.APPLICATION_JSON)

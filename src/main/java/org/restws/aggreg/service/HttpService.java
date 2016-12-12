@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class HttpService {
-	private static String INSTAGRAM_URL = "http://localhost:8000/";
 	
 	public static String callMethod(String method, String path, HashMap<String,String> params) throws IOException {
         URL url = new URL( path );

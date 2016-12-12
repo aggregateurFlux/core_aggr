@@ -14,14 +14,15 @@ import com.google.gson.Gson;
 public class UserApiService {
 
 	public static User getAccountInfos(String id) throws IOException {
-		HashMap<String,String> userParams = new HashMap<String,String>();
-		userParams.put("id", id);
-		String json = HttpService.callMethod("GET", "http://localhost:8081/get/user", userParams);
-		
-		Gson gson = new Gson();
-        return  gson.fromJson( json , User.class);
+		//A DECOMMENTER SI LES AUTRES APIs SONT FONCTIONNELLES
+		//HashMap<String,String> userParams = new HashMap<String,String>();
+		//userParams.put("id", id);
+		//String json = HttpService.callMethod("GET", "http://localhost:8081/get/user", userParams);
+		//Gson gson = new Gson();
+		//return  gson.fromJson( json , User.class);
         
-		//return new User(id,"login","password",new TwitterAccount("id","secret"), new InstagramAccount("token"));
+		//A COMMENTER SI LES AUTRES APIs SONT FONCTIONNELLES
+		return new User(id,"login","password",new TwitterAccount("id","secret"), new InstagramAccount("token"));
 	}
 	
 	public static User connection(String login, String password) {
