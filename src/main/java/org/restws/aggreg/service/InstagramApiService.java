@@ -27,4 +27,9 @@ public class InstagramApiService {
 		list.add(new Post());
 		return list;
 	}
+	
+	public static boolean commentPost(Post post, User user) {
+		
+		return true;
+	}
 }

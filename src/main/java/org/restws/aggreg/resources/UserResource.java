@@ -1,6 +1,7 @@
 package org.restws.aggreg.resources;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,8 +13,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.json.JSONException;
 import org.restws.aggreg.model.InstagramAccount;
+import org.restws.aggreg.model.Post;
 import org.restws.aggreg.model.TwitterAccount;
 import org.restws.aggreg.model.User;
+import org.restws.aggreg.service.InstagramApiService;
+import org.restws.aggreg.service.TwitterApiService;
 import org.restws.aggreg.service.UserApiService;
 
 @Path("/user")
@@ -47,17 +51,7 @@ public class UserResource {
 	 *GET : http://localhost:8080/core_aggreg/webapi/user/connection/{login}&{password}
 	 *Retour : 
 	{
-	    "id":"xxx",
-	    "instagramAccount": {
-	        "name":"Instagram",
-	        "token":"token"
-	        },
-	    "login":"login",
-	    "password":"password",
-	    "twitteraccount": {
-	    "name":"Twitter",
-	    "accessTokenId":"id",
-	    "accessTokenSecret":"secret"}
+	    "id":"xxx"
 	}
 	 */
 	@GET
@@ -98,7 +92,7 @@ public class UserResource {
 	 * Envoi : {  "token":"token"  }
 	 * Retour :
 	    true : liaison créer
-	    false : echec de la liason
+	    false : echec de la liaison
 	 */
 	@POST
 	@Path("/addInstagramAccount")
@@ -113,7 +107,7 @@ public class UserResource {
 	 * Envoi : {  "access_token_id":"access_token_id", "access_token_secret":"access_token_secret"  }
 	 * Retour :
 	    true : liaison créée
-	    false : echec de la liason
+	    false : echec de la liaison
 	 */
 	@POST
 	@Path("/addTwitterAccount")
@@ -122,4 +116,26 @@ public class UserResource {
 	public String addTwitterAccount(@PathParam("accessTokenId") String accessTokenId,@PathParam("accessTokenSecret") String accessTokenSecret) {
 		return UserApiService.addTwitterAccount(new TwitterAccount(accessTokenId,accessTokenSecret));
 	}
+	
+	/* Récupérer les derniers posts de l'utilisateur ayant pour id {id}
+	 * GET : http://localhost:8080/core_aggreg/webapi/post/{id}
+	 * Retour :
+	 * [{  "authorName":"authorName",
+	 *     "content":"content",
+	 *     "idAuthor":"idAuthor",
+	 *     "imageLink":"imageLink",
+	 *     "postCreatedAt":"postCreatedAt"
+	 *  },
+	 *  {
+	 *      ...
+	 *  }]
+	 */
+	@GET
+	@Path("/{id}/feed")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Post> getLastPosts(@PathParam("id") String id) throws IOException, JSONException {
+		List<Post> list = InstagramApiService.getPosts(UserApiService.getAccountInfos(id));
+		list.addAll(TwitterApiService.getPosts(UserApiService.getAccountInfos(id)));
+		return list;
+    }
 }
