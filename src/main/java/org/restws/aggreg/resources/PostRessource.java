@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.json.JSONException;
 import org.restws.aggreg.model.Post;
+import org.restws.aggreg.model.User;
 import org.restws.aggreg.service.InstagramApiService;
 import org.restws.aggreg.service.PostService;
 import org.restws.aggreg.service.TwitterApiService;
@@ -34,7 +36,7 @@ public class PostRessource {
 	@Path("/createPost")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createPost(@PathParam("id") String id, @PathParam("content") String content) throws IOException, JSONException {
+	public String createPost(@PathParam("id") String id, @PathParam("content") String content, @PathParam("imageLink") String imageLink) throws IOException, JSONException {
 		return TwitterApiService.createPost(content, UserApiService.getAccountInfos(id).getTwitteraccount().getAccessTokenId(),UserApiService.getAccountInfos(id).getTwitteraccount().getAccessTokenSecret());
 	}
 	
@@ -47,11 +49,14 @@ public class PostRessource {
 	     false : échec création du post	 
 	 */
 	@POST
-	@Path("/commentPost")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public String commentPost(@PathParam("id") String id,@PathParam("content") String content) {
-		return "true";
-		/* envoyer token, content*/
-	}
+	   @Path("/commentPost")
+	   @Consumes(MediaType.APPLICATION_JSON)
+	   @Produces(MediaType.APPLICATION_JSON)
+	   public String commentPost(@HeaderParam("idUser") String idUser, @HeaderParam("content") String content, @HeaderParam("mediaId") String mediaId) throws IOException, JSONException {
+	       UserApiService userApiService = new UserApiService();
+	       User user = UserApiService.getAccountInfos( idUser );
+	       InstagramApiService.postComment(mediaId, content, user);
+	       return "true";
+	       
+	   }
 }

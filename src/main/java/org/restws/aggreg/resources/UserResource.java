@@ -57,7 +57,7 @@ public class UserResource {
 	@GET
 	@Path("/connection/{login}&{password}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String connection(@PathParam("login") String login,@PathParam("password") String password) {
+    public String connection(@PathParam("login") String login,@PathParam("password") String password) throws IOException, JSONException {
         return UserApiService.connection(login, password).getId();
     }
 
@@ -83,7 +83,7 @@ public class UserResource {
 	@Path("/createAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User createAccount(@PathParam("login") String login,@PathParam("password") String password) {
+	public User createAccount(@PathParam("login") String login,@PathParam("password") String password) throws IOException, JSONException {
 		return UserApiService.accountCreation(login, password);
 	}
 	

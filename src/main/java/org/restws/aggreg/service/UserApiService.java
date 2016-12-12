@@ -38,15 +38,27 @@ public class UserApiService {
 	    return user;
 	}
 	
-	public static User connection(String login, String password) {
-		//appel api user (API en développement)
-		return new User("1","login","password",new TwitterAccount("id","secret"), new InstagramAccount("token"));
+	public static User connection(String login, String password) throws IOException, JSONException {
+		HashMap<String,String> userParams = new HashMap<String,String>();
+		userParams.put("login", login);
+		userParams.put("password", password);
+		String json = HttpService.callMethod("GET", "http://localhost:8081/get/identification", userParams);
+		JSONObject jsonObject = new JSONObject( json );
+		User user = new User();
+	    user.setId( String.valueOf(jsonObject.get( "id" )) );
+		return user;
 	}
 	
 	
-	public static User accountCreation(String login, String password) {
-		//appel api user (API en développement)
-		return new User("1","login","password",new TwitterAccount("id","secret"), new InstagramAccount("token"));
+	public static User accountCreation(String login, String password) throws IOException, JSONException {
+		HashMap<String,String> userParams = new HashMap<String,String>();
+		userParams.put("login", login);
+		userParams.put("password", password);
+		String json = HttpService.callMethod("POST", "http://localhost:8081/post/user", userParams);
+		JSONObject jsonObject = new JSONObject( json );
+		User user = new User();
+	    user.setId( String.valueOf(jsonObject.get( "id" )) );
+		return user;
 	}
 	
 	public static String addInstagramAccount(InstagramAccount instagramAccount) {

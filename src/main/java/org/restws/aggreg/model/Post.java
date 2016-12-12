@@ -10,6 +10,7 @@ public class Post {
 	private String content;
 	private String imageLink;
 	private String postCreatedAt;
+	private String origin;
 	
 	public Post() {
 		this.idAuthor = "idAuthor";
@@ -17,15 +18,25 @@ public class Post {
 		this.content = "content";
 		this.imageLink = "imageLink";
 		this.postCreatedAt = "postCreatedAt";
+		this.origin = "origin";
 	}
 
-	public Post(String idAuthor, String authorName, String content, String imageLink, String postCreatedAt) {
+	public Post(String idAuthor, String authorName, String content, String imageLink, String postCreatedAt, String origin) {
 		super();
 		this.idAuthor = idAuthor;
 		this.authorName = authorName;
 		this.content = content;
 		this.imageLink = imageLink;
 		this.postCreatedAt = postCreatedAt;
+		this.origin = origin;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
 	}
 
 	public String getIdAuthor() {

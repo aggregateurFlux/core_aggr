@@ -35,6 +35,7 @@ public class TwitterApiService {
 	           post.setAuthorName( String.valueOf( jsonObject.get( "authorName" ) ) );
 	           post.setContent( String.valueOf( jsonObject.get( "content" ) ) );
 	           post.setImageLink( String.valueOf( jsonObject.get("imageLink") ) );
+	           post.setOrigin("Twitter");
 	           
 	           posts.add( post );
 	       }
