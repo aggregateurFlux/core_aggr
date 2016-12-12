@@ -12,19 +12,8 @@ import java.util.Map.Entry;
 public class HttpService {
 	private static String INSTAGRAM_URL = "http://localhost:8000/";
 	
-	public static void appel_a_call() throws IOException {
-		String path = "user/feed";
-
-        HashMap<String,String> params = new HashMap<String,String>();
-
-        params.put("access_token", "4255759889.110ab74.3d1f61e9dec8403786edc677575b2fa2");
-        //params.put("content", "le message a submit");
-        
-        String json = callMethod("GET", path, params);
-	}
-	
 	public static String callMethod(String method, String path, HashMap<String,String> params) throws IOException {
-        URL url = new URL(INSTAGRAM_URL + path);
+        URL url = new URL( path );
         URLConnection connection = url.openConnection();
         
         for(Entry<String, String> entry : params.entrySet()) {

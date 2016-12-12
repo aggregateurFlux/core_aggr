@@ -1,5 +1,6 @@
 package org.restws.aggreg.resources;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +23,13 @@ public class PostRessource {
 	PostService postService = new PostService();
 	
 	//getLastPosts
-	//return : Lis<String>
+	//return : List<String>
 	@GET
 	@Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Post> getLastPosts(@PathParam("id") String id) {
+    public List<Post> getLastPosts(@PathParam("id") String id) throws IOException {
 		List<Post> list = InstagramApiService.getPosts(UserApiService.getAccountInfos(id));
-		list.add(TwitterApiService.getPosts(UserApiService.getAccountInfos(id)));
+		list.addAll(TwitterApiService.getPosts(UserApiService.getAccountInfos(id)));
 		return list;
     }
 	

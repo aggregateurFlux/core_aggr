@@ -10,25 +10,30 @@ public class User {
 	private String id;
 	private String login;
 	private String password;
-	private List<SocialNetworkAccount> socialNetworkAccounts;
+	private TwitterAccount twitteraccount;
+	private InstagramAccount instagramAccount;
 	
-	public User() {
-		super();
-		this.id = "id";
-		this.login = "login";
-		this.password = "password";
+	public TwitterAccount getTwitteraccount() {
+		return twitteraccount;
 	}
-	public User(String id, String login, String password) {
+	public void setTwitteraccount(TwitterAccount twitteraccount) {
+		this.twitteraccount = twitteraccount;
+	}
+	public InstagramAccount getInstagramAccount() {
+		return instagramAccount;
+	}
+	public void setInstagramAccount(InstagramAccount instagramAccount) {
+		this.instagramAccount = instagramAccount;
+	}
+	
+	public User(String id, String login, String password, TwitterAccount twitteraccount,
+			InstagramAccount instagramAccount) {
 		super();
 		this.id = id;
 		this.login = login;
 		this.password = password;
-	}
-	public List<SocialNetworkAccount> getSocialNetworkAccounts() {
-		return socialNetworkAccounts;
-	}
-	public void setSocialNetworkAccounts(List<SocialNetworkAccount> socialNetworkAccounts) {
-		this.socialNetworkAccounts = socialNetworkAccounts;
+		this.twitteraccount = twitteraccount;
+		this.instagramAccount = instagramAccount;
 	}
 	public String getId() {
 		return id;
