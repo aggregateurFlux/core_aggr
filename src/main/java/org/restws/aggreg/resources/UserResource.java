@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.json.JSONException;
 import org.restws.aggreg.model.InstagramAccount;
 import org.restws.aggreg.model.TwitterAccount;
 import org.restws.aggreg.model.User;
@@ -38,7 +39,7 @@ public class UserResource {
 	@GET
 	@Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUser(@PathParam("id") String id) throws IOException {
+    public User getUser(@PathParam("id") String id) throws IOException, JSONException {
         return UserApiService.getAccountInfos(id);
     }
 	
@@ -62,8 +63,8 @@ public class UserResource {
 	@GET
 	@Path("/connection/{login}&{password}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User connection(@PathParam("login") String login,@PathParam("password") String password) {
-        return UserApiService.connection(login, password);
+    public String connection(@PathParam("login") String login,@PathParam("password") String password) {
+        return UserApiService.connection(login, password).getId();
     }
 
 	/*Création de compte : Créer un user côté serveur et récupérer ses infos
