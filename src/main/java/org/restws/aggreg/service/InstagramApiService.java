@@ -17,11 +17,12 @@ public class InstagramApiService {
 
 	public static List<Post> getPosts(User user) throws IOException, JSONException {
 		HashMap<String, String> InstagramParams = new HashMap<String, String>();
-		InstagramParams.put("token", user.getInstagramAccount().getToken());
-	       String json = HttpService.callMethod("GET", "http://localhost:8012/timeline", InstagramParams); //twitter call
+		
+		InstagramParams.put("access_token", user.getInstagramAccount().getToken());
+		
+	       String json = HttpService.callMethod("GET", "http://localhost:8000/user/feed", InstagramParams); //twitter call
 
 	       List<Post> posts = new ArrayList<Post>();
-
 	       JSONArray jsonArray = new JSONArray(json);
 
 	       for (int i = 0; i < jsonArray.length(); i++) {

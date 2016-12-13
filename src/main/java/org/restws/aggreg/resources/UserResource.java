@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -83,7 +84,7 @@ public class UserResource {
 	@Path("/createAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User createAccount(@PathParam("login") String login,@PathParam("password") String password) throws IOException, JSONException {
+	public User createAccount(@HeaderParam("login") String login,@HeaderParam("password") String password) throws IOException, JSONException {
 		return UserApiService.accountCreation(login, password);
 	}
 	
@@ -98,7 +99,8 @@ public class UserResource {
 	@Path("/addInstagramAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addInstagramAccount(@PathParam("token") String token) {
+	public String addInstagramAccount(@HeaderParam("token") String token) {
+		//API BDD EN DEVLOPPEMENT
 		return UserApiService.addInstagramAccount(new InstagramAccount(token));
 	}
 	
@@ -113,7 +115,8 @@ public class UserResource {
 	@Path("/addTwitterAccount")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addTwitterAccount(@PathParam("accessTokenId") String accessTokenId,@PathParam("accessTokenSecret") String accessTokenSecret) {
+	public String addTwitterAccount(@HeaderParam("accessTokenId") String accessTokenId,@HeaderParam("accessTokenSecret") String accessTokenSecret) {
+		//API BDD EN DEVLOPPEMENT
 		return UserApiService.addTwitterAccount(new TwitterAccount(accessTokenId,accessTokenSecret));
 	}
 	

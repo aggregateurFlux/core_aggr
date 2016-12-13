@@ -52,3 +52,4 @@ public class TwitterApiService {
 		return HttpService.callMethod("POST", "http://localhost:8012/user/feed", TwitterParams);
 	}
 }
+

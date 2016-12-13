@@ -36,7 +36,7 @@ public class PostRessource {
 	@Path("/createPost")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createPost(@PathParam("id") String id, @PathParam("content") String content, @PathParam("imageLink") String imageLink) throws IOException, JSONException {
+	public String createPost(@PathParam("id") String id, @PathParam("content") String content, @PathParam("imageLink") String imageLink) throws IOException, JSONException {		
 		return TwitterApiService.createPost(content, UserApiService.getAccountInfos(id).getTwitteraccount().getAccessTokenId(),UserApiService.getAccountInfos(id).getTwitteraccount().getAccessTokenSecret());
 	}
 	
@@ -49,14 +49,13 @@ public class PostRessource {
 	     false : échec création du post	 
 	 */
 	@POST
-	   @Path("/commentPost")
-	   @Consumes(MediaType.APPLICATION_JSON)
-	   @Produces(MediaType.APPLICATION_JSON)
-	   public String commentPost(@HeaderParam("idUser") String idUser, @HeaderParam("content") String content, @HeaderParam("mediaId") String mediaId) throws IOException, JSONException {
-	       UserApiService userApiService = new UserApiService();
-	       User user = UserApiService.getAccountInfos( idUser );
-	       InstagramApiService.postComment(mediaId, content, user);
-	       return "true";
+	@Path("/commentPost")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String commentPost(@HeaderParam("idUser") String idUser, @HeaderParam("content") String content, @HeaderParam("mediaId") String mediaId) throws IOException, JSONException {
+	    User user = UserApiService.getAccountInfos( idUser );
+	    InstagramApiService.postComment(mediaId, content, user);
+	    return "true";
 	       
-	   }
+	}
 }
